@@ -74,7 +74,7 @@ sudo -E sh -c 'echo "deb $ROS_REPOSITORY_PATH `lsb_release -cs` main" > /etc/apt
 wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
 lsb_release -a
 sudo apt-get update -q || echo Ignore error of apt-get update
-sudo apt-get install -y --force-yes -q -qq python-rosdep python-wstool python-catkin-tools ros-$ROS_DISTRO-rosbash ros-$ROS_DISTRO-rospack ccache
+sudo apt-get install -y --force-yes -q -qq python-rosdep python-wstool python-catkin-tools ros-$ROS_DISTRO-rosbash ros-$ROS_DISTRO-rospack #ccache
 # setup catkin-tools option
 if [ ! "$CATKIN_TOOLS_BUILD_OPTIONS" ]; then
   if [[ "$(pip show catkin-tools | grep '^Version:' | awk '{print $2}')" =~ 0.3.[0-9]+ ]]; then
@@ -85,11 +85,11 @@ if [ ! "$CATKIN_TOOLS_BUILD_OPTIONS" ]; then
   fi
 fi
 # setup ccache
-sudo ln -s /usr/bin/ccache /usr/local/bin/gcc
-sudo ln -s /usr/bin/ccache /usr/local/bin/g++
-sudo ln -s /usr/bin/ccache /usr/local/bin/cc
-sudo ln -s /usr/bin/ccache /usr/local/bin/c++
-ccache -s
+# sudo ln -s /usr/bin/ccache /usr/local/bin/gcc
+# sudo ln -s /usr/bin/ccache /usr/local/bin/g++
+# sudo ln -s /usr/bin/ccache /usr/local/bin/cc
+# sudo ln -s /usr/bin/ccache /usr/local/bin/c++
+# ccache -s
 
 if [ "$EXTRA_DEB" ]; then sudo apt-get install -q -qq -y $EXTRA_DEB;  fi
 # MongoDB hack - I don't fully understand this but its for moveit_warehouse
