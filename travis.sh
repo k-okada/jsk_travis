@@ -260,11 +260,13 @@ wstool init
 if [ "$USE_DEB" == false ]; then
     if [ -e $CI_SOURCE_PATH/.travis.rosinstall ]; then
         # install (maybe unreleased version) dependencies from source
+        #sed "s/\$(ROS_DISTRO)/$ROS_DISTRO/" $CI_SOURCE_PATH/.travis.rosinstall | wstool merge -
         wstool merge file://$CI_SOURCE_PATH/.travis.rosinstall
     fi
     if [ -e $CI_SOURCE_PATH/.travis.rosinstall.$ROS_DISTRO ]; then
         # install (maybe unreleased version) dependencies from source for specific ros version
-        wstool merge --merge-replace -y file://$CI_SOURCE_PATH/.travis.rosinstall.$ROS_DISTRO
+        #sed "s/\$(ROS_DISTRO)/$ROS_DISTRO/" $CI_SOURCE_PATH/.travis.rosinstall.$ROS_DISTRO | wstool merge -
+        wstool merge file://$CI_SOURCE_PATH/.travis.rosinstall.$ROS_DISTRO
     fi
     wstool update
 fi
